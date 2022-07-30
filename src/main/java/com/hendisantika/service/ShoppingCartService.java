@@ -98,4 +98,9 @@ public class ShoppingCartService {
         shoppingCart.setItems(items);
         return shoppingCartRepository.save(shoppingCart);
     }
+
+    public void clearShoppingCart(String sessionToken) {
+        ShoppingCart sh = shoppingCartRepository.findBySessionToken(sessionToken);
+        shoppingCartRepository.delete(sh);
+    }
 }
