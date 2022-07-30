@@ -90,4 +90,10 @@ public class ProductService {
         p.setDescription(description);
         productRepository.save(p);
     }
+
+    public void changeProductPrice(Long id, Double price) {
+        Product p = productRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Product with " + id + " not found"));
+        p.setPrice(price);
+        productRepository.save(p);
+    }
 }
