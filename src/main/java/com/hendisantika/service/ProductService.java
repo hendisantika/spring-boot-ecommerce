@@ -22,6 +22,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 import java.util.List;
 
@@ -195,5 +196,16 @@ public class ProductService {
             e.printStackTrace();
         }
         return image;
+    }
+
+    private String bufferedImageTobase64(BufferedImage image) throws UnsupportedEncodingException {
+        final ByteArrayOutputStream out = new ByteArrayOutputStream();
+        try {
+            ImageIO.write(image, "JPEG", Base64.getEncoder().wrap(out));
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return out.toString(StandardCharsets.ISO_8859_1);
     }
 }
