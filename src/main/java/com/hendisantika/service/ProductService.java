@@ -208,4 +208,8 @@ public class ProductService {
         }
         return out.toString(StandardCharsets.ISO_8859_1);
     }
+
+    public Product getProductById(Long id) {
+        return productRepository.findById(id).get();
+    }
 }
