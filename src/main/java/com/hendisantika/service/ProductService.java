@@ -84,4 +84,10 @@ public class ProductService {
         p.setName(name);
         productRepository.save(p);
     }
+
+    public void changeProductDescription(Long id, String description) {
+        Product p = productRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Product with " + id + " not found"));
+        p.setDescription(description);
+        productRepository.save(p);
+    }
 }
