@@ -71,4 +71,9 @@ public class ShoppingCartService {
         return this.addShoppingCartFirstTime(id, sessionToken, quantity);
 
     }
+
+    public ShoppingCart getShoppingCartBySessionToken(String sessionToken) {
+        return shoppingCartRepository.findBySessionToken(sessionToken);
+    }
+
 }
