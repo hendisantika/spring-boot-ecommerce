@@ -183,4 +183,17 @@ public class ProductService {
         ByteArrayInputStream inputStream = new ByteArrayInputStream(data);
         return ImageIO.read(inputStream);
     }
+
+    private BufferedImage base64ToBufferedImage(String base64Img) {
+        BufferedImage image = null;
+        byte[] decodedBytes = Base64.getDecoder().decode(base64Img);
+
+        try {
+            image = ImageIO.read(new ByteArrayInputStream(decodedBytes));
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return image;
+    }
 }
