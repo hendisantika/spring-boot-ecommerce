@@ -15,7 +15,9 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.Base64;
 import java.util.List;
 
@@ -146,5 +148,22 @@ public class ProductService {
         Product p = productRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Product with " + id + " not found"));
         p.getDiscount().setDiscount(discount);
         productRepository.save(p);
+    }
+
+    public String resizeImageForUse(String src, int width, int height) {
+        BufferedImage image = base64ToBufferedImage(src);
+        try {
+            image = resizeImage(image, width, height);
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        try {
+            return bufferedImageTobase64(image);
+        } catch (UnsupportedEncodingException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return null;
     }
 }
