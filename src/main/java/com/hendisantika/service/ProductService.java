@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.Base64;
+import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.
@@ -66,5 +67,9 @@ public class ProductService {
             p.getCategories().add(category);
         }
         return p;
+    }
+
+    public List<Product> getAllProducts() {
+        return productRepository.findAll();
     }
 }
