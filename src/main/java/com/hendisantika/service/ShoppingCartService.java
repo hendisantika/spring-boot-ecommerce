@@ -7,7 +7,9 @@ import com.hendisantika.repository.CartItemRepository;
 import com.hendisantika.repository.ShoppingCartRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Date;
 import java.util.Set;
@@ -76,4 +78,9 @@ public class ShoppingCartService {
         return shoppingCartRepository.findBySessionToken(sessionToken);
     }
 
+    public CartItem updateShoppingCartItem(Long id, int quantity) {
+        CartItem cartItem = cartItemRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Product with " + id + " not found"));
+        cartItem.setQuantity(quantity);
+        return cartItemRepository.saveAndFlush(cartItem);
+    }
 }
