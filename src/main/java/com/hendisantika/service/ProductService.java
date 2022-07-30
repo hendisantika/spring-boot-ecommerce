@@ -122,4 +122,23 @@ public class ProductService {
         p.getCarousel().add(carousel);
         productRepository.save(p);
     }
+
+    public void changeProductQuantity(Long id, int quantity) {
+        Product p = productRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Product with " + id + " not found"));
+        p.setQuantity(quantity);
+        productRepository.save(p);
+
+    }
+
+    public void saveProductDiscount(Long id, int discount) {
+        Product p = productRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Product with " + id + " not found"));
+        if (p.getDiscount() == null) {
+            Coupon c = new Coupon();
+            c.setDiscount(discount);
+            p.setDiscount(c);
+        } else {
+            p.getDiscount().setDiscount(discount);
+        }
+        productRepository.save(p);
+    }
 }
