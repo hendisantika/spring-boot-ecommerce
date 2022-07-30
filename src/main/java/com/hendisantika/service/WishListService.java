@@ -1,5 +1,6 @@
 package com.hendisantika.service;
 
+import com.hendisantika.model.Product;
 import com.hendisantika.model.WishList;
 import com.hendisantika.model.WishListItem;
 import com.hendisantika.repository.WishListItemRepository;
@@ -9,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.Set;
 
 /**
  * Created by IntelliJ IDEA.
@@ -39,5 +41,31 @@ public class WishListService {
         wishlist.setSessionToken(sessionToken);
         wishlist.setDate(new Date());
         return wishListRepository.save(wishlist);
+    }
+
+    public WishList addToExistingWishList(Long id, String sessionToken) {
+        WishList wishList = wishListRepository.findBySessionToken(sessionToken);
+        Product p = productService.getProductById(id);
+        Boolean productDoesExistInTheCart = false;
+        if (wishList != null) {
+            Set<WishListItem> items = wishList.getItems();
+            for (WishListItem item : items) {
+                if (item.getProduct().equals(p)) {
+                    productDoesExistInTheCart = true;
+                    break;
+                }
+
+            }
+        }
+        if (!productDoesExistInTheCart && (wishList != null)) {
+            WishListItem item1 = new WishListItem();
+            item1.setDate(new Date());
+            item1.setProduct(p);
+            wishList.getItems().add(item1);
+            return wishListRepository.saveAndFlush(wishList);
+        }
+
+        return null;
+
     }
 }
