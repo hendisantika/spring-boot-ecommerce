@@ -216,4 +216,8 @@ public class ProductService {
     public List<Product> searchProductByNameLike(String value) {
         return productRepository.findByNameContainingIgnoreCase(value);
     }
+
+    public List<String> getAllBrands() {
+        return productRepository.findAllBrandsDistincts();
+    }
 }
