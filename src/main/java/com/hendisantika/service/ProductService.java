@@ -175,7 +175,7 @@ public class ProductService {
     private BufferedImage resizeImage(BufferedImage image, int width, int height) throws IOException {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         try {
-            Thumbnails.of(image).size(width, height).outputFormat("JPEG").outputQuality(1).toOutputStream(outputstream);
+            Thumbnails.of(image).size(width, height).outputFormat("JPEG").outputQuality(1).toOutputStream(outputStream);
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -210,7 +210,7 @@ public class ProductService {
     }
 
     public Product getProductById(Long id) {
-        return productRepository.findById(id).get();
+        return productRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Product with " + id + " not found"));
     }
 
     public List<Product> searchProductByNameLike(String value) {
@@ -219,5 +219,18 @@ public class ProductService {
 
     public List<String> getAllBrands() {
         return productRepository.findAllBrandsDistincts();
+    }
+
+    public Product getProductWithBiggestDiscount() {
+        Coupon discount = couponRepository.findMax();
+        List<Product> products = productRepository.findAll();
+        Product featuredProduct = null;
+        for (Product p : products) {
+            if (p.getDiscount().equals(discount)) {
+                featuredProduct = p;
+                break;
+            }
+        }
+        return featuredProduct;
     }
 }
