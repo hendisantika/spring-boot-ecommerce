@@ -1,5 +1,6 @@
 package com.hendisantika.service;
 
+import com.hendisantika.model.Carousel;
 import com.hendisantika.model.Category;
 import com.hendisantika.model.Coupon;
 import com.hendisantika.model.Product;
@@ -103,5 +104,22 @@ public class ProductService {
 
     public List<Category> getAllCategories() {
         return categoryRepository.findAll();
+    }
+
+    public void addImageToProduct(MultipartFile file, Long id) {
+
+        Product p = productRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Product with " + id + " not found"));
+        Carousel carousel = new Carousel();
+        String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+        if (fileName.contains("..")) {
+            System.out.println("not a valid file");
+        }
+        try {
+            carousel.setImage(resizeImageForUse(Base64.getEncoder().encodeToString(file.getBytes()), 400, 400));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        p.getCarousel().add(carousel);
+        productRepository.save(p);
     }
 }
