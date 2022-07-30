@@ -141,4 +141,10 @@ public class ProductService {
         }
         productRepository.save(p);
     }
+
+    public void changeProductDiscount(Long id, int discount) {
+        Product p = productRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Product with " + id + " not found"));
+        p.getDiscount().setDiscount(discount);
+        productRepository.save(p);
+    }
 }
