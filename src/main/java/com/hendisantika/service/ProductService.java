@@ -1,5 +1,6 @@
 package com.hendisantika.service;
 
+import com.hendisantika.model.Category;
 import com.hendisantika.model.Coupon;
 import com.hendisantika.model.Product;
 import com.hendisantika.repository.CategoryRepository;
@@ -55,5 +56,15 @@ public class ProductService {
         p.setDiscount(c);
         p = addCategoriesToProduct(p, categories);
         productRepository.save(p);
+    }
+
+    private Product addCategoriesToProduct(Product p, String categories) {
+        String[] cates = categories.split(",");
+        Category category = null;
+        for (String str : cates) {
+            category = categoryRepository.findById(Long.parseLong(str)).get();
+            p.getCategories().add(category);
+        }
+        return p;
     }
 }
