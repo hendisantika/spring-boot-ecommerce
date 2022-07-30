@@ -83,4 +83,19 @@ public class ShoppingCartService {
         cartItem.setQuantity(quantity);
         return cartItemRepository.saveAndFlush(cartItem);
     }
+
+    public ShoppingCart removeCartIemFromShoppingCart(Long id, String sessionToken) {
+        ShoppingCart shoppingCart = shoppingCartRepository.findBySessionToken(sessionToken);
+        Set<CartItem> items = shoppingCart.getItems();
+        CartItem cartItem = null;
+        for (CartItem item : items) {
+            if (item.getId() == id) {
+                cartItem = item;
+            }
+        }
+        items.remove(cartItem);
+        cartItemRepository.delete(cartItem);
+        shoppingCart.setItems(items);
+        return shoppingCartRepository.save(shoppingCart);
+    }
 }
