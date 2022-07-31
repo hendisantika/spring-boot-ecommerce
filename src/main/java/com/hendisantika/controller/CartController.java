@@ -60,8 +60,16 @@ public class CartController {
     @GetMapping("/removeCartItem/{id}")
     public String removeItem(@PathVariable("id") Long id, HttpServletRequest request) {
         String sessionToken = (String) request.getSession(false).getAttribute("sessionToken");
-        System.out.println("got here ");
+        log.info("got here ...");
         shoppingCartService.removeCartIemFromShoppingCart(id, sessionToken);
+        return "redirect:/shoppingCart";
+    }
+
+    @GetMapping("/clearShoppingCart")
+    public String clearShoppingString(HttpServletRequest request) {
+        String sessionToken = (String) request.getSession(false).getAttribute("sessionToken");
+        request.getSession(false).removeAttribute("sessionToken");
+        shoppingCartService.clearShoppingCart(sessionToken);
         return "redirect:/shoppingCart";
     }
 }
