@@ -8,6 +8,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -41,4 +44,18 @@ public class AdminProductController {
         model.addAttribute("products", productService.getAllProducts());
         return "admin/product";
     }
+
+    @PostMapping("/Admin/addP")
+    public String saveProduct(@RequestParam("file") MultipartFile file,
+                              @RequestParam("pname") String name,
+                              @RequestParam("price") Double price,
+                              @RequestParam("desc") String desc,
+                              @RequestParam("quantity") int quantity,
+                              @RequestParam("brand") String brand,
+                              @RequestParam("categories") String categories) {
+
+        productService.saveProductToDB(file, name, desc, quantity, price, brand, categories);
+        return "redirect:/Admin/product";
+    }
+
 }
