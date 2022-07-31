@@ -93,4 +93,10 @@ public class AdminProductController {
         return "redirect:/admin/index";
     }
 
+    @PostMapping("/admin/changeDiscount")
+    public String changeDiscount(@RequestParam("id") Long id,
+                                 @RequestParam("newDiscount") int discount) {
+        productService.changeProductDiscount(id, discount);
+        return "redirect:/admin/index";
+    }
 }
