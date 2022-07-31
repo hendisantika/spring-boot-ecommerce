@@ -47,4 +47,12 @@ public class CartController {
     public String showShoppingCartView() {
         return "shoppingCart";
     }
+
+    @PostMapping("/updateShoppingCart")
+    public String updateCartItem(@RequestParam("item_id") Long id,
+                                 @RequestParam("quantity") int quantity) {
+
+        shoppingCartService.updateShoppingCartItem(id, quantity);
+        return "redirect:shoppingCart";
+    }
 }
