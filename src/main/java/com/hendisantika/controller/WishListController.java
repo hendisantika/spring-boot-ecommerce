@@ -4,6 +4,11 @@ import com.hendisantika.service.WishListService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.UUID;
 
 /**
  * Created by IntelliJ IDEA.
@@ -20,4 +25,19 @@ import org.springframework.stereotype.Controller;
 @Slf4j
 public class WishListController {
     private final WishListService wishListService;
+
+    @GetMapping("/addToWishlist/{id}")
+    public String addToWishList(@PathVariable("id") Long id, HttpServletRequest request) {
+        String sessionToken = (String) request.getSession(true).getAttribute("sessionTokenWishList");
+        if (sessionToken == null) {
+
+            sessionToken = UUID.randomUUID().toString();
+            request.getSession().setAttribute("sessionTokenWishList", sessionToken);
+            wishListService.addToWishFirstTime(id, sessionToken);
+        } else {
+            wishListService.addToExistingWishList(id, sessionToken);
+        }
+
+        return "redirect:/";
+    }
 }
