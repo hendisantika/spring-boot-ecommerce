@@ -1,9 +1,13 @@
 package com.hendisantika.controller;
 
+import com.hendisantika.model.Product;
 import com.hendisantika.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 /**
  * Created by IntelliJ IDEA.
@@ -20,4 +24,11 @@ import org.springframework.stereotype.Controller;
 @Slf4j
 public class DetailsController {
     private final ProductService productService;
+
+    @GetMapping("/detail/{id}")
+    public String showIndex(@PathVariable("id") Long id, Model model) {
+        Product product = productService.getProductById(id);
+        model.addAttribute("product", product);
+        return "details";
+    }
 }
