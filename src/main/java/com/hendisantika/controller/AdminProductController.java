@@ -106,4 +106,11 @@ public class AdminProductController {
         productService.saveCategory(category);
         return "redirect:/admin/product";
     }
+
+    @PostMapping("/admin/addPictureToP")
+    public String addImageToProduct(@RequestParam("file") MultipartFile file,
+                                    @RequestParam("product_id") Long id) {
+        productService.addImageToProduct(file, id);
+        return "redirect:/admin/product";
+    }
 }
