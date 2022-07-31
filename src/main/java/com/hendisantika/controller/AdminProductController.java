@@ -71,4 +71,11 @@ public class AdminProductController {
         productService.changeProductName(id, name);
         return "redirect:/admin/index";
     }
+
+    @PostMapping("/admin/changeDescription")
+    public String changeDescription(@RequestParam("id") Long id,
+                                    @RequestParam("newDescription") String description) {
+        productService.changeProductDescription(id, description);
+        return "redirect:/admin/index";
+    }
 }
