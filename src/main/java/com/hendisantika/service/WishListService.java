@@ -72,4 +72,20 @@ public class WishListService {
     public WishList getWishListBySessionToken(String sessionToken) {
         return wishListRepository.findBySessionToken(sessionToken);
     }
+
+    public WishList removeItemWishList(Long id, String sessionToken) {
+        WishList WishList = wishListRepository.findBySessionToken(sessionToken);
+        Set<WishListItem> items = WishList.getItems();
+        WishListItem item = null;
+        for (WishListItem item1 : items) {
+            if (item1.getId() == id) {
+                item = item1;
+            }
+        }
+        items.remove(item);
+        wishListItemRepository.delete(item);
+        WishList.setItems(items);
+        return wishListRepository.save(WishList);
+    }
+
 }
