@@ -113,4 +113,11 @@ public class AdminProductController {
         productService.addImageToProduct(file, id);
         return "redirect:/admin/product";
     }
+
+    @PostMapping("/admin/addDiscountToP")
+    public String addDiscountToProduct(@RequestParam("product_id") Long id,
+                                       @RequestParam("discount") int discount) {
+        productService.saveProductDiscount(id, discount);
+        return "redirect:/admin/product";
+    }
 }
