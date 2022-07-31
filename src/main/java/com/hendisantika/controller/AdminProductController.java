@@ -64,4 +64,11 @@ public class AdminProductController {
         productService.deleteProductById(id);
         return "redirect:/admin/index";
     }
+
+    @PostMapping("/admin/changeName")
+    public String changeProductName(@RequestParam("id") Long id,
+                                    @RequestParam("newPname") String name) {
+        productService.changeProductName(id, name);
+        return "redirect:/admin/index";
+    }
 }
