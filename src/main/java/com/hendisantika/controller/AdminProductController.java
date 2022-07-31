@@ -1,5 +1,6 @@
 package com.hendisantika.controller;
 
+import com.hendisantika.model.Category;
 import com.hendisantika.model.Product;
 import com.hendisantika.service.ProductService;
 import lombok.RequiredArgsConstructor;
@@ -31,5 +32,13 @@ public class AdminProductController {
         List<Product> products = productService.getAllProducts();
         model.addAttribute("products", products);
         return "admin/index";
+    }
+
+    @GetMapping("/admin/product")
+    public String showAddProduct(Model model) {
+        model.addAttribute("category", new Category());
+        model.addAttribute("categories", productService.getAllCategories());
+        model.addAttribute("products", productService.getAllProducts());
+        return "admin/product";
     }
 }
