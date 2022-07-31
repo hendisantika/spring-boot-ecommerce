@@ -48,4 +48,12 @@ public class WishListController {
         wishListService.removeItemWishList(id, sessionToken);
         return "redirect:/shoppingCart";
     }
+
+    @GetMapping("/clearWishList")
+    public String clearShoppingString(HttpServletRequest request) {
+        String sessionToken = (String) request.getSession(false).getAttribute("sessionTokenWishList");
+        request.getSession(false).removeAttribute("sessionTokenWishList");
+        wishListService.clearWishList(sessionToken);
+        return "redirect:/shoppingCart";
+    }
 }
