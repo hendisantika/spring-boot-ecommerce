@@ -68,4 +68,8 @@ public class WishListService {
         return null;
 
     }
+
+    public WishList getWishListBySessionToken(String sessionToken) {
+        return wishListRepository.findBySessionToken(sessionToken);
+    }
 }
