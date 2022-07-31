@@ -4,6 +4,8 @@ import com.hendisantika.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 
 /**
  * Created by IntelliJ IDEA.
@@ -20,4 +22,10 @@ import org.springframework.stereotype.Controller;
 @Slf4j
 public class IndexController {
     private final ProductService productService;
+
+    @GetMapping("/")
+    public String showIndex(Model model) {
+        model.addAttribute("products", productService.getAllProducts());
+        return "index";
+    }
 }
