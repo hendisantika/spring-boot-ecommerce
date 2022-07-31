@@ -1,9 +1,14 @@
 package com.hendisantika.controller;
 
+import com.hendisantika.model.Product;
 import com.hendisantika.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+
+import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.
@@ -20,4 +25,11 @@ import org.springframework.stereotype.Controller;
 @Slf4j
 public class AdminProductController {
     private final ProductService productService;
+
+    @GetMapping("/admin/index")
+    public String showExampleView(Model model) {
+        List<Product> products = productService.getAllProducts();
+        model.addAttribute("products", products);
+        return "admin/index";
+    }
 }
