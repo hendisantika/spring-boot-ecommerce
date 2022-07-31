@@ -88,4 +88,8 @@ public class WishListService {
         return wishListRepository.save(WishList);
     }
 
+    public void clearWishList(String sessionToken) {
+        WishList sh = wishListRepository.findBySessionToken(sessionToken);
+        wishListRepository.delete(sh);
+    }
 }
