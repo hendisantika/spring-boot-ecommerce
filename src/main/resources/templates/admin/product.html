@@ -9,7 +9,7 @@
 
 	<title>Product Administration</title>
 
-	<!-- Bootstrap CSS  & FontAwsome-->
+	<!-- Bootstrap CSS  & Font Awesome-->
 	<base href="/">
 <link href="css/bootstrap.css" rel="stylesheet">
 <link href="font-awesome/css1/all.css" rel="stylesheet">
@@ -108,17 +108,18 @@
 
 						<div id="product" class="tabcontent">
 						   <h5 class="text-center">add product</h5>
-							<form class="text-center border border-light p-5" action="/Admin/addP" method="POST" enctype="multipart/form-data">
+							<form action="/admin/addP" class="text-center border border-light p-5"
+								  enctype="multipart/form-data" method="POST">
 
 								<!-- Name -->
 								<input type="text" name="pname" id="name"
-									class="form-control mb-4" placeholder="Product Name">
-                                <!-- Name -->
+									   class="form-control mb-4" placeholder="Product Name">
+								<!-- Name -->
 								<input type="text" name="brand" id="brand"
-									class="form-control mb-4" placeholder="Product brand">
+									   class="form-control mb-4" placeholder="Product brand">
 								<!-- Price -->
 								<input type="text" name="price" id="price"
-									class="form-control mb-4" placeholder="Product Price">
+									   class="form-control mb-4" placeholder="Product Price">
 								<!-- quantity -->
 								<input type="text" name="quantity" id="quantity"
 									class="form-control mb-4" placeholder="Product quantity">
@@ -150,30 +151,33 @@
 
 						<div id="category" class="tabcontent">
 							<h5 class="text-center"> add category</h5>
-							<form action="/Admin/addCategory" method="POST" th:Object="${category}">
-							  <div class="form-group">
-							   <input type="text" th:field="*{name}" class="form-control" placeholder="add category"/>
-							  </div>
-							 
-							  <div class="form-group">
-							  <button class="btn btn-info btn-block" type="submit">submit</button>
-							  </div>
+							<form action="/admin/addCategory" method="POST" th:Object="${category}">
+								<div class="form-group">
+									<input type="text" th:field="*{name}" class="form-control"
+										   placeholder="add category"/>
+								</div>
+
+								<div class="form-group">
+									<button class="btn btn-info btn-block" type="submit">submit</button>
+								</div>
 							</form>
 						</div>
 
 						<div id="coupon" class="tabcontent">
 							<h5 class="text-center">add discount to product</h5>
-							<form action="/Admin/addDiscountToP" method="POST">
-							  <div class="form-group">
-							   <select name="product_id" class="form-control" >
-							    <option th:each="product : ${products}" th:value="${product.id}">[[${product.name}]]</option>
-							   </select>
-							  </div>
-							  
-                              <div class="form-group">
-							  <input type="number" class="form-control" name="discount" min="0" max="75" />
-							  </div>
-							  <div class="form-group">
+							<form action="/admin/addDiscountToP" method="POST">
+								<div class="form-group">
+									<select name="product_id" class="form-control">
+										<option th:each="product : ${products}" th:value="${product.id}">
+											[[${product.name}]]
+										</option>
+									</select>
+								</div>
+
+								<div class="form-group">
+									<input type="number" class="form-control" name="discount" min="0" max="75"/>
+								</div>
+								<div class="form-group">
 							  <button class="btn btn-info btn-block" type="submit">submit</button>
 							  </div>
 							</form>
@@ -181,16 +185,18 @@
 						
 						<div id="album" class="tabcontent">
 							<h5 class="text-center">add pictures to produt</h5>
-							<form action="/Admin/addPictureToP" method="POST" enctype="multipart/form-data">
-							  <div class="form-group">
-							   <select name="product_id" class="form-control" >
-							    <option th:each="product : ${products}" th:value="${product.id}">[[${product.name}]]</option>
-							   </select>
-							  </div>
-							  <div class="custom-file mb-4">
+							<form action="/admin/addPictureToP" enctype="multipart/form-data" method="POST">
+								<div class="form-group">
+									<select name="product_id" class="form-control">
+										<option th:each="product : ${products}" th:value="${product.id}">
+											[[${product.name}]]
+										</option>
+									</select>
+								</div>
+								<div class="custom-file mb-4">
 									<input type="file" name="file" class="custom-file-input"
-										id="customFile"> <label class="custom-file-label"
-										for="customFile">Product Image</label>
+										   id="customFile"> <label class="custom-file-label"
+																   for="customFile">Product Image</label>
 								</div>
 							  <div class="form-group">
 							  <button class="btn btn-info btn-block" type="submit">submit</button>

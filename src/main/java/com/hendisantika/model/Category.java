@@ -1,6 +1,7 @@
 package com.hendisantika.model;
 
 import com.sun.istack.NotNull;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -27,6 +28,7 @@ import java.util.Set;
 @Entity
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 @Builder
 public class Category {
     @Id
@@ -39,22 +41,10 @@ public class Category {
     @ManyToMany(fetch = FetchType.EAGER, mappedBy = "categories")
     private Set<Product> products;
 
-    public Category() {
-
-    }
-
     public Category(Long id, String name) {
         super();
         this.id = id;
         this.name = name;
-    }
-
-    public Set<Product> getProducts() {
-        return products;
-    }
-
-    public void setProducts(Set<Product> products) {
-        this.products = products;
     }
 
     public int getProductsNumber() {
