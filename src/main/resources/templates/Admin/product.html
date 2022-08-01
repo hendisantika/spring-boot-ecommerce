@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<title>Product Administration</title>
+
+<!-- Bootstrap CSS  & FontAwsome-->
+<base href="/">
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="font-awesome/css1/all.css" rel="stylesheet">
+<link rel="icon" href="images/icon.png" />
+<!-- Our Custom CSS -->
+<link rel="stylesheet" href="css/style4.css">
+<link rel="stylesheet" href="css/bootstrap-select.min.css">
+</head>
+<body>
+	<div class="wrapper">
+		<!-- Sidebar  -->
+		<nav th:fragment="sidebar" id="sidebar">
+			<div class="sidebar-header">
+				<h3>&nbsp;&nbsp;&nbsp;E-c App</h3>
+				<strong><i class="fa fa-shopping-cart" aria-hidden="true"></i></strong>
+			</div>
+			<ul class="list-unstyled components">
+				<li class="active"><a href="#homeSubmenu"
+					data-toggle="collapse" aria-expanded="false"
+					class="dropdown-toggle"> <i class="fas fa-home"></i> Home
+				</a>
+					<ul class="collapse list-unstyled" id="homeSubmenu">
+						<li><a href="#">My cart</a></li>
+						<li><a href="#">My wishlist</a></li>
+					</ul></li>
+				<li><a href="#"> <i class="fas fa-briefcase"></i> About
+				</a> <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false"
+					class="dropdown-toggle"> <i class="fas fa-copy"></i> pages
+				</a>
+					<ul class="collapse list-unstyled" id="pageSubmenu">
+						<li><a href="#">category</a></li>
+						<li><a href="#">products</a></li>
+						<li><a href="#">more</a></li>
+					</ul></li>
+				<li><a href="#"> <i class="fas fa-image"></i> Portfolio
+				</a></li>
+				<li><a href="#"> <i class="fas fa-question"></i> FAQ
+				</a></li>
+				<li><a href="#"> <i class="fas fa-paper-plane"></i> Contact
+				</a></li>
+			</ul>
+		</nav>
+
+		<!-- Page Content  -->
+		<div id="content">
+			<nav th:fragment="sidebar"
+				class="navbar navbar-expand-lg navbar-light"
+				style="border-bottom: 4px solid #7386D5;">
+				<div class="container-fluid">
+					<button type="button" id="sidebarCollapse"
+						class="btn btn-info mr-4">
+						<i class="fas fa-align-left"></i>
+						<!-- <span>Toggle Sidebar</span> -->
+					</button>
+					<form class="form-inline frm">
+						<input class="form-control mr-sm-2" type="search"
+							placeholder="Search" aria-label="Search">
+						<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+					</form>
+					<button class="btn btn-light d-inline-block d-lg-none ml-auto"
+						type="button" data-toggle="collapse"
+						data-target="#navbarSupportedContent"
+						aria-controls="navbarSupportedContent" aria-expanded="false"
+						aria-label="Toggle navigation">
+						<i class="fas fa-align-justify"></i>
+					</button>
+					<div class="collapse navbar-collapse" id="navbarSupportedContent">
+						<ul class="nav navbar-nav ml-auto">
+							
+							<li class="nav-item  active"><a
+								class="nav-link btn btn-light mr-2" href="#"
+								onclick="handleAddProduct(event);">add Product</a></li>
+							<li class="nav-item"><a onclick=" handleListProduct(event);"
+								class="nav-link btn btn-light mr-2" href="#">Products</a></li>
+							<li class="nav-item"><a class="nav-link btn btn-light"
+								href="#"><i class="fas fa-sign-out-alt"></i></a></li>
+						</ul>
+					</div>
+				</div>
+			</nav>
+			<div class="line"></div>
+			<div class="container" id="app">
+				<!-- Default form subscription -->
+				<div class="card">
+					<div class="card-header">
+
+						<div class="tab">
+							<button class="tablinks" onclick="openTab(event, 'product')"
+								id="defaultOpen">product</button>
+							<button class="tablinks" onclick="openTab(event, 'category')">category</button>
+							<button class="tablinks" onclick="openTab(event, 'album')">product pictures</button>
+							<button class="tablinks" onclick="openTab(event, 'coupon')">Coupon-discount</button>
+						</div>
+					</div>
+					<div class="card-body">
+
+						<div id="product" class="tabcontent">
+						   <h5 class="text-center">add product</h5>
+							<form class="text-center border border-light p-5" action="/Admin/addP" method="POST" enctype="multipart/form-data">
+
+								<!-- Name -->
+								<input type="text" name="pname" id="name"
+									class="form-control mb-4" placeholder="Product Name">
+                                <!-- Name -->
+								<input type="text" name="brand" id="brand"
+									class="form-control mb-4" placeholder="Product brand">
+								<!-- Price -->
+								<input type="text" name="price" id="price"
+									class="form-control mb-4" placeholder="Product Price">
+								<!-- quantity -->
+								<input type="text" name="quantity" id="quantity"
+									class="form-control mb-4" placeholder="Product quantity">
+
+
+								<!-- Description -->
+								<textarea class="form-control mb-4" id="desc" name="desc"
+									placeholder="Product Description">Product Description
+                                 </textarea>
+								
+								<div class="form-group">
+                    
+									<select class="form-control selectpicker" name="categories"
+										title="select categories .." multiple data-actions-box="true">
+
+										<option th:each="category : ${categories}" th:value="${category.id}">[[${category.name}]]</option>
+																			
+									</select>
+								</div>
+								<div class="custom-file mb-4">
+									<input type="file" name="file" class="custom-file-input"
+										id="customFile"> <label class="custom-file-label"
+										for="customFile">Product Image</label>
+								</div>
+								<!-- Sign in button -->
+								<button class="btn btn-info btn-block" type="submit">submit</button>
+							</form>
+						</div>
+
+						<div id="category" class="tabcontent">
+							<h5 class="text-center"> add category</h5>
+							<form action="/Admin/addCategory" method="POST" th:Object="${category}">
+							  <div class="form-group">
+							   <input type="text" th:field="*{name}" class="form-control" placeholder="add category"/>
+							  </div>
+							 
+							  <div class="form-group">
+							  <button class="btn btn-info btn-block" type="submit">submit</button>
+							  </div>
+							</form>
+						</div>
+
+						<div id="coupon" class="tabcontent">
+							<h5 class="text-center">add discount to product</h5>
+							<form action="/Admin/addDiscountToP" method="POST">
+							  <div class="form-group">
+							   <select name="product_id" class="form-control" >
+							    <option th:each="product : ${products}" th:value="${product.id}">[[${product.name}]]</option>
+							   </select>
+							  </div>
+							  
+                              <div class="form-group">
+							  <input type="number" class="form-control" name="discount" min="0" max="75" />
+							  </div>
+							  <div class="form-group">
+							  <button class="btn btn-info btn-block" type="submit">submit</button>
+							  </div>
+							</form>
+						</div>
+						
+						<div id="album" class="tabcontent">
+							<h5 class="text-center">add pictures to produt</h5>
+							<form action="/Admin/addPictureToP" method="POST" enctype="multipart/form-data">
+							  <div class="form-group">
+							   <select name="product_id" class="form-control" >
+							    <option th:each="product : ${products}" th:value="${product.id}">[[${product.name}]]</option>
+							   </select>
+							  </div>
+							  <div class="custom-file mb-4">
+									<input type="file" name="file" class="custom-file-input"
+										id="customFile"> <label class="custom-file-label"
+										for="customFile">Product Image</label>
+								</div>
+							  <div class="form-group">
+							  <button class="btn btn-info btn-block" type="submit">submit</button>
+							  </div>
+							</form>
+						</div>
+					</div>
+				</div>
+				<!-- Default form subscription -->
+
+
+			</div>
+			<div class="line"></div>
+		</div>
+	</div>
+	<!-- Bootstrap JS & jQuery -->
+	<script src="js/jquery-3.1.1.min.js"></script>
+    <script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"
+		integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ"
+		crossorigin="anonymous"></script>
+	<script src="js/bootstrap.js"></script>
+	<script type="text/javascript" src="js/bootstrap-select.min.js"></script>
+	<!-- Popper.JS -->
+	
+
+	<script type="text/javascript" src="font-awesome/js1/fontawesome.js"></script>
+	
+	<script type="text/javascript" src="api/ajaxFetch.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$('#sidebarCollapse').on('click', function() {
+				$('#sidebar').toggleClass('active');
+			});
+			
+			$(".chosen-select").chosen({
+				  no_results_text: "Oops, nothing found!"
+				})
+			// To style all selects
+		  $('select').selectpicker();
+		});
+		
+		
+	</script>
+	<script>
+		function openTab(evt, Name) {
+			var i, tabcontent, tablinks;
+			tabcontent = document.getElementsByClassName("tabcontent");
+			for (i = 0; i < tabcontent.length; i++) {
+				tabcontent[i].style.display = "none";
+			}
+			tablinks = document.getElementsByClassName("tablinks");
+			for (i = 0; i < tablinks.length; i++) {
+				tablinks[i].className = tablinks[i].className.replace(
+						" active", "");
+			}
+			document.getElementById(Name).style.display = "block";
+			evt.currentTarget.className += " active";
+		}
+
+		// Get the element with id="defaultOpen" and click on it
+		document.getElementById("defaultOpen").click();
+	</script>
+
+</body>
+</html>
