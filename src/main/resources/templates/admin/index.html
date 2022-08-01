@@ -1,16 +1,16 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	xmlns:th="http://www.thymeleaf.org">
+<html lang="en"
+	  xmlns:th="http://www.thymeleaf.org">
 
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-<title>Adimin | Home</title>
+	<title>Adimin | Home</title>
 
-<!-- Bootstrap CSS  & FontAwsome-->
-<base href="/">
+	<!-- Bootstrap CSS  & FontAwsome-->
+	<base href="/">
 <link href="css/bootstrap.css" rel="stylesheet">
 <link href="font-awesome/css1/all.css" rel="stylesheet">
 <link rel="icon" href="images/icon.png" />
@@ -81,9 +81,10 @@
 					</button>
 					<div class="collapse navbar-collapse" id="navbarSupportedContent">
 						<ul class="nav navbar-nav ml-auto">
-							
-							<li class="nav-item  active"><a class="nav-link btn btn-light mr-2" th:href="@{/Admin/product}"
-								>add Product</a></li>
+
+							<li class="nav-item  active"><a class="nav-link btn btn-light mr-2"
+															th:href="@{/templates/admin/product}"
+							>add Product</a></li>
 							<li class="nav-item"><a onclick=" handleListProduct(event);" class="nav-link btn btn-light mr-2" href="#">Products</a></li>
 							<li class="nav-item"><a class="nav-link btn btn-light" href="#"><i class="fas fa-sign-out-alt"></i></a></li>
 						</ul>
@@ -297,8 +298,8 @@
 								</div>
 							</div>
 						</td>
-						<td><a th:href="@{/Admin/deleteProd/{id}(id=${product.id})}"
-							class="btn btn-danger btn-sm mt-4">delete</a></td>
+						<td><a th:href="@{/templates/admin/deleteProd/{id}(id=${product.id})}"
+							   class="btn btn-danger btn-sm mt-4">delete</a></td>
 					</tr>
 				</tbody>
 			</table>
