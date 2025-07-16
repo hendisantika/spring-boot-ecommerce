@@ -24,7 +24,7 @@ public class MySQLContainerTest {
 
     // Define the MySQL container with a valid MySQL version
     @Container
-    private static final MySQLContainer<?> mySQLContainer = new MySQLContainer<>("mysql:8.0")
+    private static final MySQLContainer<?> mySQLContainer = new MySQLContainer<>("mysql:9.3.0")
             .withDatabaseName("shopDB")
             .withUsername("yu71")
             .withPassword("53cret");
