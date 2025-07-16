@@ -1,0 +1,30 @@
+services:
+  mysql:
+    image: mysql:9.3.0
+    container_name: shop_mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=yu71
+      - MYSQL_DATABASE=shopDB
+      - MYSQL_USER=yu71
+      - MYSQL_PASSWORD=53cret
+    ports:
+      - "3308:3306"
+    volumes:
+      - ./mysql_data:/var/lib/mysql
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    restart: always
+    depends_on:
+      - mysql
+    environment:
+      PMA_HOST: mysql
+      MYSQL_ROOT_PASSWORD: yu71
+    ports:
+      - "8082:80"
+volumes:
+  mysql_data:
