@@ -1,6 +1,6 @@
 services:
   mysql:
-    image: mysql:9.3.0
+    image: mysql:8.0
     container_name: shop_mysql
     environment:
       - MYSQL_ROOT_PASSWORD=yu71

@@ -18,13 +18,14 @@ catalog, shopping cart, and wishlist functionality.
 
 - **Backend**: Java 21, Spring Boot 3.5.3
 - **Frontend**: Thymeleaf, HTML, CSS, JavaScript
-- **Database**: MySQL 9.3.0
+- **Database**: MySQL 8.0
 - **ORM**: Spring Data JPA, Hibernate
 - **Build Tool**: Maven
 - **Containerization**: Docker, Docker Compose
 - **Database Admin**: PHPMyAdmin
 - **Image Processing**: Thumbnailator
 - **Development Tools**: Spring Boot DevTools, Lombok
+- **Testing**: Testcontainers for database integration testing
 
 ## Prerequisites
 
