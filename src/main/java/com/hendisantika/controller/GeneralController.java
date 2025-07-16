@@ -5,13 +5,12 @@ import com.hendisantika.model.WishList;
 import com.hendisantika.service.ProductService;
 import com.hendisantika.service.ShoppingCartService;
 import com.hendisantika.service.WishListService;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ModelAttribute;
-
-import javax.servlet.http.HttpServletRequest;
 
 /**
  * Created by IntelliJ IDEA.
