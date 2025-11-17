@@ -1,0 +1,361 @@
+/* UI/UX Enhancements for ShopHub */
+
+/* ===== Loading States ===== */
+.btn-loading {
+    position: relative;
+    pointer-events: none;
+    opacity: 0.7;
+}
+
+.btn-loading::after {
+    content: '';
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    top: 50%;
+    left: 50%;
+    margin-left: -8px;
+    margin-top: -8px;
+    border: 2px solid #ffffff;
+    border-radius: 50%;
+    border-top-color: transparent;
+    animation: spinner 0.6s linear infinite;
+}
+
+@keyframes spinner {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* ===== Smooth Transitions ===== */
+.product, .card, .btn, a {
+    transition: all 0.3s ease;
+}
+
+.product:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* ===== Toast Notifications ===== */
+.toast-container {
+    position: fixed;
+    top: 80px;
+    right: 20px;
+    z-index: 9999;
+}
+
+.toast {
+    min-width: 250px;
+    padding: 15px 20px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    animation: slideInRight 0.3s ease;
+}
+
+.toast-success {
+    background-color: #28a745;
+    color: white;
+}
+
+.toast-error {
+    background-color: #dc3545;
+    color: white;
+}
+
+.toast-info {
+    background-color: #17a2b8;
+    color: white;
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* ===== Product Cards Enhancement ===== */
+.product {
+    border-radius: 12px;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.product img {
+    transition: transform 0.3s ease;
+}
+
+.product:hover img {
+    transform: scale(1.05);
+}
+
+.off {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 12px;
+    z-index: 1;
+}
+
+/* ===== Cart Badge ===== */
+.label {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: #dc3545;
+    color: white;
+    border-radius: 50%;
+    padding: 2px 6px;
+    font-size: 11px;
+    font-weight: bold;
+    min-width: 20px;
+    text-align: center;
+}
+
+/* ===== Form Improvements ===== */
+.form-control:focus,
+.input-filter:focus {
+    border-color: #7386D5;
+    box-shadow: 0 0 0 0.2rem rgba(115, 134, 213, 0.25);
+}
+
+.form-control::placeholder {
+    color: #999;
+    opacity: 1;
+}
+
+/* ===== Responsive Improvements ===== */
+@media (max-width: 768px) {
+    .product {
+        margin-bottom: 15px;
+    }
+
+    #sidebar {
+        margin-left: -200px;
+    }
+
+    #sidebar.active {
+        margin-left: 0;
+    }
+
+    .navbar .form-inline {
+        width: 100%;
+        margin-top: 10px;
+    }
+}
+
+/* ===== Accessibility Improvements ===== */
+.btn:focus,
+a:focus,
+button:focus {
+    outline: 2px solid #7386D5;
+    outline-offset: 2px;
+}
+
+/* Skip link for keyboard navigation */
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: #7386D5;
+    color: white;
+    padding: 8px;
+    text-decoration: none;
+    z-index: 100;
+}
+
+.skip-link:focus {
+    top: 0;
+}
+
+/* ===== Shopping Cart Improvements ===== */
+.product-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.product-thumb img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.remove-from-cart {
+    color: #dc3545;
+    font-size: 18px;
+    transition: all 0.2s;
+}
+
+.remove-from-cart:hover {
+    color: #c82333;
+    transform: scale(1.2);
+}
+
+/* ===== Modal Improvements ===== */
+.modal-content {
+    border-radius: 12px;
+    border: none;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+}
+
+.modal-header {
+    border-bottom: 1px solid #eee;
+    background: #f8f9fa;
+}
+
+.modal-footer {
+    border-top: 1px solid #eee;
+}
+
+/* ===== Category Pills ===== */
+.category-pill {
+    display: inline-block;
+    padding: 5px 12px;
+    margin: 3px;
+    background: #f0f0f0;
+    border-radius: 15px;
+    font-size: 14px;
+    transition: all 0.2s;
+    cursor: pointer;
+}
+
+.category-pill:hover {
+    background: #7386D5;
+    color: white;
+}
+
+/* ===== Empty State ===== */
+.empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    color: #999;
+}
+
+.empty-state i {
+    font-size: 64px;
+    margin-bottom: 20px;
+    color: #ddd;
+}
+
+/* ===== Price Display ===== */
+.price-original {
+    text-decoration: line-through;
+    color: #999;
+    font-size: 14px;
+}
+
+.price-discounted {
+    color: #28a745;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+/* ===== Wishlist Heart Animation ===== */
+.product_fav i {
+    transition: all 0.3s ease;
+}
+
+.product_fav:hover i.fa-heart {
+    color: #dc3545;
+    transform: scale(1.2);
+}
+
+/* ===== Search Dropdown ===== */
+#dropdown-container {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+#dropdown-container a {
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#dropdown-container a:hover {
+    background-color: #f8f9fa;
+}
+
+/* ===== Sidebar Active State ===== */
+#sidebar ul li.active > a {
+    background: rgba(255, 255, 255, 0.1);
+    border-left: 3px solid #fff;
+}
+
+/* ===== Tab Styling ===== */
+.tab {
+    border-bottom: 1px solid #dee2e6;
+}
+
+.tablinks {
+    background-color: #f8f9fa;
+    border: 1px solid transparent;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-right: 5px;
+}
+
+.tablinks:hover {
+    background-color: #e9ecef;
+}
+
+.tablinks.active {
+    background-color: #fff;
+    border-color: #dee2e6 #dee2e6 #fff;
+}
+
+.tabcontent {
+    display: none;
+    padding: 20px 0;
+    animation: fadeIn 0.5s;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* ===== Quantity Input Styling ===== */
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.input-group .btn-custom {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.round-input {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
