@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"
-	  xmlns:th="http://www.thymeleaf.org">
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:th="http://www.thymeleaf.org">
 
 <head>
 	<meta charset="utf-8">
@@ -104,9 +105,29 @@
 									title="View Cart" style="color: red; font-size: 20px"></i><span
 									class="label">[[${shoppingCart.itemsNumber}]]</span>
 							</a></li>
-							<li class="nav-item"><a class="nav-link fl2" href="#"> <i
-									class="fa fa-user" style="color: #17a2b8; font-size: 20px"></i>
-							</a></li>
+
+                            <!-- User Authentication Section -->
+                            <li class="nav-item" sec:authorize="isAuthenticated()">
+                                <a class="nav-link" href="#" style="color: #17a2b8;">
+                                    <i class="fa fa-user" style="font-size: 18px"></i>
+                                    <span sec:authentication="name" style="font-size: 14px; margin-left: 5px;"></span>
+                                </a>
+                            </li>
+                            <li class="nav-item" sec:authorize="isAuthenticated()">
+                                <form method="post" style="display: inline;" th:action="@{/logout}">
+                                    <button class="btn btn-link nav-link" style="color: #dc3545; text-decoration: none;"
+                                            type="submit">
+                                        <i class="fas fa-sign-out-alt" style="font-size: 18px"></i>
+                                        <span style="font-size: 14px; margin-left: 5px;">Logout</span>
+                                    </button>
+                                </form>
+                            </li>
+                            <li class="nav-item" sec:authorize="!isAuthenticated()">
+                                <a class="nav-link" style="color: #28a745;" th:href="@{/login}">
+                                    <i class="fas fa-sign-in-alt" style="font-size: 18px"></i>
+                                    <span style="font-size: 14px; margin-left: 5px;">Login</span>
+                                </a>
+                            </li>
 
 						</ul>
 					</div>
