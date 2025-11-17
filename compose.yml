@@ -1,7 +1,12 @@
 services:
   mysql:
-    image: mysql:9.3.0
+    image: mysql:9.5.0
+    platform: linux/arm64
     container_name: shop_mysql
+    command: --max_allowed_packet=256M
+      --innodb_buffer_pool_size=512M
+      --innodb_file_per_table=1
+      --skip-log-bin
     environment:
       - MYSQL_ROOT_PASSWORD=yu71
       - MYSQL_DATABASE=shopDB
@@ -10,7 +15,7 @@ services:
     ports:
       - "3308:3306"
     volumes:
-      - ./mysql_data:/var/lib/mysql
+      - mysql_data:/var/lib/mysql
     healthcheck:
       test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
       interval: 10s
