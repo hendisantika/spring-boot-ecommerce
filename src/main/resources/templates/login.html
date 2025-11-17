@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+
+    <title>Login - ShopHub</title>
+
+    <!-- Bootstrap CSS & Font Awesome-->
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="font-awesome/css1/all.css" rel="stylesheet">
+    <link href="images/icon.png" rel="icon"/>
+    <!-- Custom CSS -->
+    <link href="css/enhancements.css" rel="stylesheet">
+
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .login-container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            max-width: 900px;
+            width: 100%;
+        }
+
+        .login-left {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 60px 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .login-right {
+            padding: 60px 40px;
+        }
+
+        .brand-logo {
+            font-size: 48px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .form-control {
+            border-radius: 10px;
+            padding: 12px 20px;
+            border: 1px solid #e0e0e0;
+            font-size: 16px;
+        }
+
+        .form-control:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+        }
+
+        .btn-login {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            border-radius: 10px;
+            padding: 12px;
+            font-size: 16px;
+            font-weight: bold;
+            color: white;
+            transition: all 0.3s;
+        }
+
+        .btn-login:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4);
+            color: white;
+        }
+
+        .alert {
+            border-radius: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .illustration {
+            font-size: 120px;
+            margin: 30px 0;
+        }
+    </style>
+</head>
+<body>
+<div class="login-container">
+    <div class="row g-0">
+        <!-- Left Side -->
+        <div class="col-md-5 login-left">
+            <div>
+                <div class="brand-logo">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span>ShopHub</span>
+                </div>
+                <h3>Welcome Back!</h3>
+                <p>Login to access your shopping cart, wishlist, and exclusive deals.</p>
+                <div class="illustration text-center">
+                    <i class="fas fa-shopping-bag"></i>
+                </div>
+                <ul class="list-unstyled">
+                    <li><i class="fas fa-check-circle me-2"></i> Secure Shopping</li>
+                    <li><i class="fas fa-check-circle me-2"></i> Fast Checkout</li>
+                    <li><i class="fas fa-check-circle me-2"></i> Track Orders</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Right Side -->
+        <div class="col-md-7 login-right">
+            <h2 class="mb-4">Sign In</h2>
+
+            <!-- Error Message -->
+            <div class="alert alert-danger" role="alert" th:if="${param.error}">
+                <i class="fas fa-exclamation-circle me-2"></i>
+                Invalid username or password. Please try again.
+            </div>
+
+            <!-- Logout Message -->
+            <div class="alert alert-success" role="alert" th:if="${param.logout}">
+                <i class="fas fa-check-circle me-2"></i>
+                You have been successfully logged out.
+            </div>
+
+            <!-- Login Form -->
+            <form method="post" th:action="@{/perform_login}">
+                <!-- CSRF Token (automatically added by Thymeleaf when using th:action) -->
+                <input th:name="${_csrf.parameterName}" th:value="${_csrf.token}" type="hidden"/>
+
+                <div class="form-group">
+                    <label for="username">
+                        <i class="fas fa-user me-2"></i>Username
+                    </label>
+                    <input autofocus class="form-control" id="username" name="username"
+                           placeholder="Enter your username" required type="text">
+                </div>
+
+                <div class="form-group">
+                    <label for="password">
+                        <i class="fas fa-lock me-2"></i>Password
+                    </label>
+                    <input class="form-control" id="password" name="password" placeholder="Enter your password"
+                           required type="password">
+                </div>
+
+                <div class="form-group form-check">
+                    <input class="form-check-input" id="remember-me" name="remember-me" type="checkbox">
+                    <label class="form-check-label" for="remember-me">
+                        Remember me
+                    </label>
+                </div>
+
+                <button class="btn btn-login btn-block w-100" type="submit">
+                    <i class="fas fa-sign-in-alt me-2"></i>Sign In
+                </button>
+
+                <div class="mt-4 text-center">
+                    <p class="text-muted">
+                        Don't have an account? <a class="text-decoration-none" href="#">Register here</a>
+                    </p>
+                    <p class="text-muted">
+                        <a class="text-decoration-none" href="/">
+                            <i class="fas fa-arrow-left me-1"></i>Back to Shopping
+                        </a>
+                    </p>
+                </div>
+            </form>
+
+            <!-- Demo Credentials -->
+            <div class="mt-4 p-3" style="background: #f8f9fa; border-radius: 10px;">
+                <h6 class="mb-2">
+                    <i class="fas fa-info-circle me-2"></i>Demo Credentials:
+                </h6>
+                <small class="d-block"><strong>Admin:</strong> admin / admin123</small>
+                <small class="d-block"><strong>User:</strong> user / user123</small>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="js/jquery-3.1.1.min.js"></script>
+<script src="js/bootstrap.js"></script>
+</body>
+</html>
