@@ -1,7 +1,10 @@
 package com.hendisantika.controller;
 
 import com.hendisantika.model.Product;
+import com.hendisantika.model.ShoppingCart;
 import com.hendisantika.service.ProductService;
+import com.hendisantika.service.ShoppingCartService;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -28,10 +31,39 @@ import java.util.List;
 @Slf4j
 public class IndexController {
     private final ProductService productService;
+    private final ShoppingCartService shoppingCartService;
 
     @GetMapping("/")
-    public String showIndex(Model model) {
-        model.addAttribute("products", productService.getAllProducts());
+    public String showIndex(Model model, HttpSession session) {
+        log.info("Loading index page with all required data");
+
+        // Get all products
+        List<Product> products = productService.getAllProducts();
+        model.addAttribute("products", products);
+
+        // Get all categories
+        model.addAttribute("categories", productService.getAllCategories());
+
+        // Get all brands
+        model.addAttribute("brands", productService.getAllBrands());
+
+        // Get featured product (product with biggest discount)
+        Product featured = productService.getProductWithBiggestDiscount();
+        model.addAttribute("featured", featured);
+
+        // Get shopping cart for the session
+        String sessionToken = session.getId();
+        ShoppingCart shoppingCart = shoppingCartService.getShoppingCartBySessionToken(sessionToken);
+        if (shoppingCart == null) {
+            shoppingCart = new ShoppingCart();
+        }
+        model.addAttribute("shoppingCart", shoppingCart);
+
+        log.info("Index page loaded with {} products, {} categories, {} brands",
+                products.size(),
+                productService.getAllCategories().size(),
+                productService.getAllBrands().size());
+
         return "index";
     }
 
