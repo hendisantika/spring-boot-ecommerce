@@ -3,6 +3,16 @@
 A modern e-commerce web application built with Spring Boot, offering a complete online shopping experience with product
 catalog, shopping cart, and wishlist functionality.
 
+## Image Screenshots
+
+Login Page
+
+![Login Page](img/login.png "Login Page")
+
+Checkout Page
+
+![Checkout Page](img/checkout.png "Checkout Page")
+
 ## Features
 
 - **Product Management**: Browse and search products by categories and brands
