@@ -1,5 +1,9 @@
 # Spring Boot E-commerce Application
 
+[![Java CI with Maven](https://github.com/hendisantika/spring-boot-ecommerce/actions/workflows/maven.yml/badge.svg)](https://github.com/hendisantika/spring-boot-ecommerce/actions/workflows/maven.yml)
+![Java](https://img.shields.io/badge/Java-25-orange)
+![Spring Boot](https://img.shields.io/badge/Spring%20Boot-4.1.1-brightgreen)
+
 A modern e-commerce web application built with Spring Boot, offering a complete online shopping experience with product
 catalog, shopping cart, and wishlist functionality.
 
@@ -26,21 +30,22 @@ Checkout Page
 
 ## Technologies Used
 
-- **Backend**: Java 21, Spring Boot 3.5.3
+- **Backend**: Java 25, Spring Boot 4.1.1, Spring Security 7
 - **Frontend**: Thymeleaf, HTML, CSS, JavaScript
-- **Database**: MySQL 8.0
+- **Database**: MySQL 9.5
 - **ORM**: Spring Data JPA, Hibernate
 - **Build Tool**: Maven
 - **Containerization**: Docker, Docker Compose
 - **Database Admin**: PHPMyAdmin
 - **Image Processing**: Thumbnailator
 - **Development Tools**: Spring Boot DevTools, Lombok
-- **Testing**: Testcontainers for database integration testing
+- **Testing**: JUnit 5, Testcontainers 2 (MySQL) for database integration testing
+- **CI**: GitHub Actions (JDK 25, Temurin)
 
 ## Prerequisites
 
-- Java 21 or higher
-- Maven 3.6 or higher
+- Java 25 (JDK 25) or higher
+- Maven 3.9 or higher (or use the bundled Maven Wrapper `./mvnw`)
 - Docker and Docker Compose (for containerized database)
 - Git
 
@@ -54,7 +59,7 @@ Checkout Page
 
 2. Start the MySQL database using Docker Compose:
    ```bash
-   docker-compose up -d
+   docker compose up -d
    ```
 
 3. Build and run the application:
@@ -65,6 +70,20 @@ Checkout Page
 4. Access the application at http://localhost:8080
 
 5. Access PHPMyAdmin at http://localhost:8082 (username: yu71, password: 53cret)
+
+## Running Tests
+
+The tests use [Testcontainers](https://testcontainers.com/) to start a throwaway MySQL instance, so Docker must be
+running, but no local database is needed:
+
+```bash
+./mvnw test
+```
+
+## Continuous Integration
+
+Every push and pull request to `main` is built by the
+[Java CI with Maven](.github/workflows/maven.yml) workflow on GitHub Actions using JDK 25 (Temurin).
 
 ## Database Configuration
 
